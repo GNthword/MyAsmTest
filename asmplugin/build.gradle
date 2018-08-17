@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'maven'//maven插件，用于上传插件到仓库
+
+uploadArchives{
+    //本地仓库的一种
+    repositories{
+        flatDir{
+            name "localRepository"
+            dir "localRepository/libs"
+        }
+    }
+}
+
+group = "com.milog.test"
+version = "1.0"
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile gradleApi()
+    compile localGroovy()
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

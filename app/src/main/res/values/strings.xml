@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyAsmTest</string>
+    <string name="function_state">open</string>
+</resources>
