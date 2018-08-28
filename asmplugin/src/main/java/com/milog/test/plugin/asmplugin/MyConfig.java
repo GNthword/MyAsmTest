@@ -7,6 +7,7 @@ package com.milog.test.plugin.asmplugin;
 public class MyConfig {
 
     public void setConfig(String config) {
+        System.out.println("cfg" + config);
         this.config = config;
     }
 
@@ -38,12 +39,13 @@ public class MyConfig {
         return ext;
     }
 
-    private String config;
-    private String projectName;
-    private boolean isOpen;
-    private MyConfigSub ext;
+    public String config;
+    public String projectName;
+    public boolean isOpen;
+    public MyConfigSub ext;
 
     public MyConfig() {
+        System.out.println("init0");
         config = "";
         projectName = "";
         isOpen = false;
@@ -53,6 +55,21 @@ public class MyConfig {
         config = "";
         projectName = "";
         isOpen = false;
+    }
+
+    public MyConfig(String config, String projectName, boolean isOpen) {
+        System.out.println("init2");
+        this.config = config;
+        this.projectName = projectName;
+        this.isOpen = isOpen;
+    }
+
+    public MyConfig(String config, String projectName, boolean isOpen, MyConfigSub ext) {
+        System.out.println("init3");
+        this.config = config;
+        this.projectName = projectName;
+        this.isOpen = isOpen;
+        this.ext = ext;
     }
 
     public void aa(String aa) {
