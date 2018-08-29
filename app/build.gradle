@@ -12,6 +12,12 @@ android {
 //        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -34,12 +40,9 @@ milog {
     config "config"
     projectName "asmplugin"
     isOpen true
-//    ext {
-//        aa "ext.aa"
-//    }
+    ext {
+        aa "ext.aa"
+    }
 }
 
-milog2 {
-    config "config"
-}
 miTask.execute()

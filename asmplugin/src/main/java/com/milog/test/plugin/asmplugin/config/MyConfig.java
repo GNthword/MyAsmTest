@@ -1,13 +1,15 @@
-package com.milog.test.plugin.asmplugin;
+package com.milog.test.plugin.asmplugin.config;
 
 /**
  * Created by miloway on 2018/8/16.
+ *
+ * use setConfig() or config()
  */
 
 public class MyConfig {
 
     public void setConfig(String config) {
-        System.out.println("cfg" + config);
+        System.out.println("cfg " + config);
         this.config = config;
     }
 
@@ -19,9 +21,6 @@ public class MyConfig {
         isOpen = open;
     }
 
-    public void setExt(MyConfigSub ext) {
-        this.ext = ext;
-    }
 
     public String getConfig() {
         return config;
@@ -45,7 +44,7 @@ public class MyConfig {
     public MyConfigSub ext;
 
     public MyConfig() {
-        System.out.println("init0");
+        System.out.println("init MyConfig()");
         config = "";
         projectName = "";
         isOpen = false;
@@ -57,31 +56,17 @@ public class MyConfig {
         isOpen = false;
     }
 
-    public MyConfig(String config, String projectName, boolean isOpen) {
-        System.out.println("init2");
-        this.config = config;
-        this.projectName = projectName;
-        this.isOpen = isOpen;
-    }
-
-    public MyConfig(String config, String projectName, boolean isOpen, MyConfigSub ext) {
-        System.out.println("init3");
-        this.config = config;
-        this.projectName = projectName;
-        this.isOpen = isOpen;
-        this.ext = ext;
-    }
-
     public void aa(String aa) {
-        if (ext != null) {
-            ext.aa(aa);
+        if (ext == null) {
+            ext = new MyConfigSub();
         }
+        ext.aa = aa;
     }
 
     public void printProperties() {
         String str = "config" + config + "\nprojectName" + projectName + "\nisOpen" + isOpen;
         if (ext != null) {
-            str += "\next" + ext.toString();
+            str += "\next " + ext.aa;
         }
         System.out.println(str);
     }

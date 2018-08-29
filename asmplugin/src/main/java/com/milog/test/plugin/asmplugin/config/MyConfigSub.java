@@ -1,4 +1,4 @@
-package com.milog.test.plugin.asmplugin;
+package com.milog.test.plugin.asmplugin.config;
 
 import org.gradle.api.plugins.ExtraPropertiesExtension;
 
@@ -10,10 +10,6 @@ import java.util.Map;
 
 public class MyConfigSub implements ExtraPropertiesExtension {
 
-
-    public void aa(String aa) {
-        this.aa = aa;
-    }
 
     public String aa;
 

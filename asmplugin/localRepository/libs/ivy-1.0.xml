@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
-  <info organisation="com.milog.test" module="asmplugin" revision="1.0" status="integration" default="true" publication="20180817162548"/>
+  <info organisation="com.milog.test" module="asmplugin" revision="1.0" status="integration" default="true" publication="20180829170619"/>
   <configurations>
     <conf name="archives" visibility="public"/>
     <conf name="compile" visibility="private"/>

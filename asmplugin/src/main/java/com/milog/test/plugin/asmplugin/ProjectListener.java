@@ -18,12 +18,12 @@ public class ProjectListener implements ProjectEvaluationListener {
 
     @Override
     public void beforeEvaluate(Project project) {
-        System.out.println("before " + project.getDisplayName());
+        System.out.println("beforeEvaluate " + project.getDisplayName());
     }
 
     @Override
     public void afterEvaluate(Project project, ProjectState state) {
-        System.out.println("after " + project.getDisplayName() + " state" + state.getFailure());
+        System.out.println("afterEvaluate " + project.getDisplayName() + " state" + state.getFailure());
         if (project == this.project && state.getFailure() == null) {
             System.out.println("after do something");
         }
