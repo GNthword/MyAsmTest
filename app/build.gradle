@@ -42,3 +42,4 @@ milog {
 milog2 {
     config "config"
 }
+miTask.execute()

@@ -3,8 +3,7 @@ package com.milog.test.plugin.asmplugin;
 import org.gradle.api.Action;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Task;
-
-import javax.inject.Inject;
+import org.gradle.api.tasks.TaskAction;
 
 import groovy.lang.Closure;
 
@@ -31,4 +30,10 @@ public class MyTask extends DefaultTask {
         System.out.println("MyTask2 =======" + action.toString());
         return super.doLast(action);
     }
+
+    @TaskAction
+    public void hello() {
+        System.out.println("MyTask hello");
+    }
+
 }

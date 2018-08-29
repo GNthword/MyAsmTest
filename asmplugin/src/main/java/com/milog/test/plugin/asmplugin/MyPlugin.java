@@ -4,10 +4,11 @@ import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.Task;
+import org.gradle.api.internal.tasks.TaskExecuter;
 
 public class MyPlugin implements Plugin<Project>{
-    MyConfig config;
-    MyConfig2 config2;
+    private MyConfig config;
+    private MyConfig2 config2;
     @Override
     public void apply(Project project) {
 
@@ -30,6 +31,17 @@ public class MyPlugin implements Plugin<Project>{
                 System.out.println(config2.config);
             }
         });
+
+        project.afterEvaluate(new Action<Project>() {
+            @Override
+            public void execute(Project project) {
+                System.out.println("project.afterEvaluate===================" + project.getDisplayName());
+                config.printProperties();
+                System.out.println(config2.config);
+            }
+        });
+        project.getGradle().addProjectEvaluationListener(new ProjectListener(project));
+
     }
 
 
