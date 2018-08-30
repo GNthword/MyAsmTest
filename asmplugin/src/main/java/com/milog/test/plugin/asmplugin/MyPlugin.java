@@ -1,8 +1,10 @@
 package com.milog.test.plugin.asmplugin;
 
+import com.android.build.gradle.AppExtension;
 import com.milog.test.plugin.asmplugin.config.MyConfig;
 import com.milog.test.plugin.asmplugin.task.ASMTask;
 import com.milog.test.plugin.asmplugin.task.MyTask;
+import com.milog.test.plugin.asmplugin.transform.ClassFileTransform;
 
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
@@ -38,6 +40,13 @@ public class MyPlugin implements Plugin<Project>{
         project.getGradle().addProjectEvaluationListener(new ProjectListener(project));
 
         configASMTask(project);
+        transform(project);
+    }
+
+    private void transform(Project project) {
+        ClassFileTransform classFileTransform = new ClassFileTransform(project);
+        AppExtension appExtension = project.getExtensions().findByType(AppExtension.class);
+        appExtension.registerTransform(classFileTransform);
     }
 
     private void configASMTask(Project project) {
@@ -62,6 +71,7 @@ public class MyPlugin implements Plugin<Project>{
 
             }
         });
+
     }
 
 
