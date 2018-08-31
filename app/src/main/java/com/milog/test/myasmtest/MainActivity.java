@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import com.milog.test.myasmtest.annotation.FunctionManager;
 
-import org.objectweb.asm.ClassWriter;
-
 public class MainActivity extends Activity {
 
     @FunctionManager("function_state")

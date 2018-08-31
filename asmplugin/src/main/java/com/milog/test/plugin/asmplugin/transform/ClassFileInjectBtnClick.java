@@ -1,12 +1,10 @@
 package com.milog.test.plugin.asmplugin.transform;
 
 import java.io.File;
-import java.io.IOException;
 
-import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
-import javassist.NotFoundException;
+import javassist.CtMethod;
 
 /**
  * Created by miloway on 2018/8/30.
@@ -15,21 +13,22 @@ import javassist.NotFoundException;
 public class ClassFileInjectBtnClick {
 
 
-    private final String inject = "inject";
-    private ClassPool classPool;
-    private final String TAG = "ClassFileInjectBtnClick ";
+    private static final String inject = "tvShow.setText(tvShow.getText() + \" inject\");";
+    private static final String TAG = "ClassFileInjectBtnClick ";
 
-    public ClassFileInjectBtnClick() {
-        classPool = ClassPool.getDefault();
-    }
 
-    public void inject(String path, String packageName) {
+    public static void inject(String path, String packageName) {
         try {
+            System.out.println("transform2 inject");
+            ClassPool classPool = ClassPool.getDefault();
+            System.out.println("transform2 inject1");
             classPool.appendClassPath(path);
+            System.out.println("transform2 inject2");
             File dir = new File(path);
             if (dir.isDirectory()) {
                 File[] files = dir.listFiles();
                 if (files == null) {
+                    System.out.println("transform2 inject3");
                     return;
                 }
 
@@ -43,11 +42,20 @@ public class ClassFileInjectBtnClick {
                             String className = filePath.substring(index, end)
                                     .replace('\\', '.').replace('/', '.');
 
-                            //开始修改class文件
+                            //class file
+                            System.out.println("transform2 inject4" + className);
                             CtClass c = classPool.getCtClass(className);
-
+                            System.out.println("transform2 inject5" + c);
                             if (c.isFrozen()) {
                                 c.defrost();
+                            }
+
+                            CtMethod[] methods = c.getDeclaredMethods("onClick");
+                            if (methods != null) {
+                                for (CtMethod method : methods) {
+                                    System.out.println("onclick method " + method.getLongName());
+                                    method.insertAfter(inject);
+                                }
                             }
 
 
@@ -58,13 +66,13 @@ public class ClassFileInjectBtnClick {
                 }
 
             }
-        } catch (NotFoundException | CannotCompileException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    private boolean filterFile(String path) {
+    private static boolean filterFile(String path) {
         System.out.println(TAG + path);
         return path.endsWith(".class")
                 && !path.contains("R.class")

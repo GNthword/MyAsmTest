@@ -37,9 +37,9 @@ public class MyPlugin implements Plugin<Project>{
             }
         });
 
-        project.getGradle().addProjectEvaluationListener(new ProjectListener(project));
+//        project.getGradle().addProjectEvaluationListener(new ProjectListener(project));
 
-        configASMTask(project);
+//        configASMTask(project);
         transform(project);
     }
 

@@ -27,9 +27,10 @@ import java.util.Set;
 public class ClassFileTransform extends Transform {
 
     private Project project;
+    private String packageName = "com\\milog\\test\\myasmtest";
 
     public ClassFileTransform(Project project) {
-        this.project = project;
+        //this.project = project;
     }
 
     @Override
@@ -64,7 +65,8 @@ public class ClassFileTransform extends Transform {
             for (DirectoryInput directoryInput : directoryInputs) {
 
                 //注入代码
-//                MyInjects.inject(directoryInput.file.absolutePath, mProject)
+                System.out.println("transform2 " + directoryInput.getFile().getAbsolutePath());
+                ClassFileInjectBtnClick.inject(directoryInput.getFile().getAbsolutePath(), packageName);
                 File outPut = outputProvider.getContentLocation(directoryInput.getName(), directoryInput.getContentTypes(), directoryInput.getScopes(),
                         Format.DIRECTORY);
                 FileUtils.copyDirectory(directoryInput.getFile(), outPut);
